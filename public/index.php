@@ -32,7 +32,7 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $r->addRoute('GET', '/product/edit/{id:\d+}', ['App\controllers\EditController', 'template']);
     $r->addRoute('POST', '/product/edit', ['App\controllers\EditController', 'edit']);
     // The /{title} suffix is optional
-    $r->addRoute('GET', '/user/{id:\d+}', 'App\controllers\UserController', 'getUser');
+    $r->addRoute('GET', '/user/{id:\d+}', ['App\controllers\UserController', 'getUser']);
 });
 
 // Fetch method and URI from somewhere
