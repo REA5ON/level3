@@ -15,6 +15,7 @@ class EditController
 
     public function template($vars) {
         $qb = new QueryBuilder();
+
         $product = $qb->getOne('products', $vars['id']);
         Template::template('edit_product', ['product' => $product]);
     }
@@ -22,7 +23,10 @@ class EditController
     public function edit() {
         $qb = new QueryBuilder();
         $image = new Image();
-        $image->updateImage($_FILES['image']['tmp_name'], 'products', $_POST['id']);
+
+        //Удаляем старую картинку
+        $image->deleteImage('products', $_POST['id']);
+        $image->uploadImage($_FILES['image']['tmp_name'], 'products', $_POST['id']);
         $qb->update('products', $_POST, $_POST['id']);
         Redirect::to('');
     }

@@ -18,7 +18,11 @@
                 <div class="p-3">
                     <h6>Comments</h6>
                 </div>
-                <div class="mt-3 d-flex flex-row align-items-center p-3 form-color"> <img src="https://i.imgur.com/zQZSWrt.jpg" width="50" class="rounded-circle mr-2"> <input type="text" class="form-control" placeholder="Enter your comment..."> </div>
+                <?php
+                $user = new \App\User();
+                if ($user->loginState()) : ?>
+                <div class=" d-flex flex-row align-items-center p-3 form-color"><img src="/App/<?= $user->getUserImage() ?>" width="50" class="rounded-circle mr-2"> <input type="text" class="form-control" placeholder="Enter your comment..."> </div>
+                <?php endif; ?>
                 <div class="mt-2">
                         <div class="w-100">
                             <div class="d-flex justify-content-between align-items-center">

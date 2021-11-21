@@ -25,12 +25,25 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">Navbar</a>
+        <a class="navbar-brand" href="/">Shop</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+        <?php
+        $user = new \App\User();
+        if ($user->loginState()) : ?>
+            <a href="/create" class="btn btn-warning">Create</a>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <a href="/user/<?= $user->getUserId() ?>"><img src="/App/<?= $user->getUserImage() ?>" width="40" class="rounded-circle mr-2"></a>
+            <a href="/logout" class="btn btn-danger">Logout</a>
         </div>
+        <?php else: ?>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <a href="/login" class="btn btn-success">Login</a>
+            <a href="/registration" class="btn btn-secondary">Registration</a>
+        </div>
+
+        <?php endif; ?>
     </div>
 </nav>
 

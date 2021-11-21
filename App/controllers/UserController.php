@@ -12,11 +12,12 @@ class UserController
 {
     public function getUser($vars)
     {
-        $data = $vars['id'];
         $qb = new QueryBuilder();
-        $user = $qb->getOne('users', $data);
-        $posts = $qb->getSelectedData('products', $data);
-        var_dump($posts);die;
-        Template::template('user', ['user' => $user]);
+        $user = $qb->getOne('users', $vars['id']);
+        $products = $qb->getSelectedData('products', $vars['id'], 'created_id');
+        Template::template('user', [
+            'user' => $user,
+            'products' => $products
+            ]);
     }
 }

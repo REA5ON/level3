@@ -47,12 +47,12 @@ class QueryBuilder extends \PDO
         return $sth->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function getSelectedData($table, $data)
+    public function getSelectedData($table, $data, $id)
     {
         $select = $this->queryFactory->newSelect();
         $select->cols(["*"])
             ->from($table)
-            ->where('category_id = :data')
+            ->where( $id . ' = :data')
             ->bindValue('data', $data);
         
         $sth = $this->pdo->prepare($select->getStatement());

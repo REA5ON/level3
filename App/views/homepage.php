@@ -11,8 +11,9 @@
     <div class="card" style="width: 18rem;">
         <img src="/App/<?= $this->e($product['image']) ?>" class="card-img-top" alt="...">
         <div class="card-body">
-            <img src="#" width="40" height="40" class="rounded-circle mr-3">
-            <a href="/user/<?= $this->e($product['created_id']) ?>" class="btn btn-success">user</a>
+            <img src="/App/images/emptyImageUser.png" width="40" height="40" class="rounded-circle mr-3">
+            <a href="/user/<?= $this->e($product['created_id']) ?>">
+                <?= \App\User::getUsersEmail($this->e($product['created_id'])) ?></a>
             <h5 class="card-title"><?= $this->e($product['title']) ?></h5>
             <p class="card-text"><?= $this->e($product['content']) ?></p>
             <a href="/product/<?= $this->e($product['id']) ?>" class="btn btn-warning">More...</a>

@@ -20,7 +20,8 @@ class CreateController
     public function create() {
         $qb = new QueryBuilder();
         $image = new Image();
-        $image->updateImage($_FILES['image']['tmp_name'], 'products');
+
+        $image->uploadImage('../App/images/emptyImageProduct.png', 'products');
         $qb->insert('products', $_POST);
         Redirect::to('');
     }

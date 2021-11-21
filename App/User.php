@@ -5,6 +5,7 @@ namespace App;
 
 use \Delight\Auth\Auth;
 use PDO;
+use SimpleMail;
 
 class User
 {
@@ -22,8 +23,8 @@ class User
             $userId = $this->auth->register($email, $password, $username, function ($selector, $token) {
 //                echo 'Send ' . $selector . ' and ' . $token . ' to the user (e.g. via email)';
                 flash()->success("Registration complete");
-                Redirect::to('login');
             });
+            return $userId;
 //            echo 'We have signed up a new user with the ID ' . $userId;
         }
         catch (\Delight\Auth\InvalidEmailException $e) {
@@ -48,7 +49,7 @@ class User
         try {
             $this->auth->login($email, $password);
             flash()->success('User is logged in');
-            Redirect::to('/');
+            Redirect::to('/shop');
         }
         catch (\Delight\Auth\InvalidEmailException $e) {
             flash()->error('Wrong email address');
@@ -66,5 +67,40 @@ class User
             flash()->error('Too many requests');
             Redirect::to('login');
         }
+    }
+
+    public function loginState() {
+        if ($this->auth->isLoggedIn()) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public function logout() {
+        try {
+            $this->auth->logOutEverywhere();
+        }
+        catch (\Delight\Auth\NotLoggedInException $e) {
+            die('Not logged in');
+        }
+    }
+
+    public function getUserId() {
+        return $this->auth->getUserId();
+    }
+
+    public function getUserImage() {
+        $id = $this->getUserId();
+        $qb = new QueryBuilder();
+        $image = $qb->getOne('users', $id);
+        return $image['image'];
+    }
+
+    public static function getUsersEmail($id) {
+        $qb = new QueryBuilder();
+        $email = $qb->getOne('users', $id);
+        return $email['email'];
     }
 }

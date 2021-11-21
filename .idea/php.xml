@@ -30,6 +30,7 @@
       <path value="$PROJECT_DIR$/vendor/tamtamchik/simple-flash" />
       <path value="$PROJECT_DIR$/vendor/claviska/simpleimage" />
       <path value="$PROJECT_DIR$/vendor/league/color-extractor" />
+      <path value="$PROJECT_DIR$/vendor/eoghanobrien/php-simple-mail" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.1" />

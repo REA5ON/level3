@@ -1,6 +1,5 @@
 <?php $this->layout('layout', ['title' => 'Login']) ?>
 
-<a href="registration" >Registration</a>
 <?php echo flash()->display(); ?>
 <div class="container-sm">
     <form method="post" action="login">

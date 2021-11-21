@@ -5,20 +5,18 @@ namespace App\controllers;
 
 
 use App\QueryBuilder;
+use App\Template;
 use League\Plates\Engine;
 
 class CategoryController
 {
     public function getCategory($vars) {
-        $category = $vars['category_id'];
         $qb = new QueryBuilder();
         $categories = $qb->getAll('categories');
-        $products = $qb->getSelectedData('products', $category);
-        $templates = new Engine('../App/views');
-        echo $templates->render('category',
-            [
-                'products' => $products,
-                'categories' => $categories
-            ]);
+        $products = $qb->getSelectedData('products', $vars['category_id'], 'category_id');
+        Template::template('category',[
+            'products' => $products,
+            'categories' => $categories
+        ]);
     }
 }

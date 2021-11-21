@@ -15,14 +15,11 @@ class Image
         $this->image = new SimpleImage();
     }
 
-    public function updateImage($from, $to, $id = null) {
-
+    //Если не указываю ID то ?????
+    public function uploadImage($from, $to, $id = null) {
         try {
             $newName = uniqid();
             $path = __DIR__ . '/images/' . $to . '/' . $newName .'.png';
-
-            // delete old image
-            $this->deleteImage('products', $id);
 
             $this->image
                 ->fromFile($from)

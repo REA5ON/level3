@@ -27,6 +27,7 @@
                                 <label for="exampleFormControlTextarea1" class="form-label">Text</label>
                                 <textarea name="content" type="text" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                             </div>
+                            <input type="hidden" name="created_id" value="<?= $_SESSION['auth_user_id'] ?>">
                             <button type="submit" class="btn btn-dark">Create</button>
 
                         </div>
